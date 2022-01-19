@@ -409,12 +409,12 @@ private fun varResultCheckOnOff(varResult: VarResult) {
     varResult.value = if(varResult.toBoolean() ) 0 else 1
 }
 
-internal fun textConstraint(gridY: Int, height: Int = 1, gridX: Int = 0, width: Int = 1) =
+fun textConstraint(gridY: Int, height: Int = 1, gridX: Int = 0, width: Int = 1) =
         GridBagConstraints(gridX, gridY, width, height, 1.0, 0.6,
                 GridBagConstraints.PAGE_START, GridBagConstraints.HORIZONTAL,
                 Insets(5, 2, 5, 2), 0, 0)
 
-internal fun labelConstraint(gridY: Int, gridX: Int = 0) =
+fun labelConstraint(gridY: Int, gridX: Int = 0) =
         GridBagConstraints(gridX, gridY, 1, 1, 0.0, 0.0,
                 GridBagConstraints.PAGE_START, GridBagConstraints.HORIZONTAL,
                 Insets(5, 2, 5, 2), 0, 0)

@@ -219,12 +219,12 @@ private fun MutableList<ButtonGroup>.addGroup(button: AbstractButton?, index: In
     this[index].add(button)
 }
 
-internal fun textConstraint(gridY: Int, height: Int = 1, gridX: Int = 0, width: Int = 1) =
+fun textConstraint(gridY: Int, height: Int = 1, gridX: Int = 0, width: Int = 1) =
     GridBagConstraints(gridX, gridY, width, height, 1.0, 0.6,
         GridBagConstraints.PAGE_START, GridBagConstraints.HORIZONTAL,
         Insets(5, 2, 5, 2), 0, 0)
 
-internal fun labelConstraint(gridY: Int, gridX: Int = 0, width: Int = 1) =
+fun labelConstraint(gridY: Int, gridX: Int = 0, width: Int = 1) =
     GridBagConstraints(gridX, gridY, width, 1, 0.0, 0.0,
         GridBagConstraints.PAGE_START, GridBagConstraints.HORIZONTAL,
         Insets(5, 2, 5, 2), 0, 0)
@@ -252,7 +252,6 @@ fun showMessage(message: String?): Boolean {
 }
 
 fun getDefaultToDirectory(): File = JFileChooser().fileSystemView.defaultDirectory
-
 
 fun intoSwingThread(process: ()-> Unit) {
     if(SwingUtilities.isEventDispatchThread() ) {

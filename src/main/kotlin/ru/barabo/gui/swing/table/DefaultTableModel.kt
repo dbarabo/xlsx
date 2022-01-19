@@ -7,7 +7,7 @@ import kotlin.reflect.KMutableProperty1
 
 class DefaultTableModel<T: Any>(private val columns: List<ColumnTableModel<T, *>>, val store: StoreService<T, *>) : AbstractTableModel() {
 
-    internal var isReadOnly = false
+    var isReadOnly = false
 
     override fun getRowCount(): Int = store.dataListCount()
 
