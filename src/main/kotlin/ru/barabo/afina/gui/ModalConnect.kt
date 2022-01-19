@@ -12,8 +12,7 @@ import java.util.*
 import java.util.prefs.Preferences
 import javax.swing.*
 
-
-internal class ModalConnect private constructor(mainWin: JFrame) : JDialog(mainWin, CONNECT_TEXT, true) {
+class ModalConnect private constructor(mainWin: JFrame) : JDialog(mainWin, CONNECT_TEXT, true) {
 
     private lateinit var cb: JComboBox<String>
 
