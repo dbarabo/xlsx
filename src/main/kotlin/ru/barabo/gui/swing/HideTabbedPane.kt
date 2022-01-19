@@ -6,7 +6,7 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI
 
 
 
-class HideTabbedPane : JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT) {
+class HideTabbedPane : JTabbedPane(TOP, SCROLL_TAB_LAYOUT) {
 
     fun addTab(panel: Component) = addTab("", panel)
 

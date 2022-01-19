@@ -23,16 +23,13 @@ open class CrossTable<E>(val crossColumns: CrossColumns<E>, crossData: CrossData
     private val integerEditor = IntegerTextEditor()
 
     init {
-
         model = CrossTableModel(crossColumns, crossData)
 
         if(renderer == null) {
             renderer = CrossTableRenderer(crossColumns, crossData)
         }
 
-        columnSum = crossColumns.columns.map { it.width }.sum()
-
-        setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
+        columnSum = crossColumns.columns.sumOf { it.width }
 
         crossData.addListener(this)
 
@@ -40,6 +37,10 @@ open class CrossTable<E>(val crossColumns: CrossColumns<E>, crossData: CrossData
     }
 
     private fun setColumnsSize(columns: Array<CrossColumn<E>>) {
+
+        if( getSelectionModel()?.selectionMode != ListSelectionModel.SINGLE_SELECTION) {
+            setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
+        }
 
         val delimetr = width.toDouble() / columnSum
 
@@ -92,7 +93,7 @@ class CrossTableModel<E>(private val crossColumns: CrossColumns<E>, private val 
 
     override fun getColumnName(column: Int): String = crossColumns.columns[column].name()
 
-    override fun getValueAt(rowIndex: Int, columnIndex: Int): Any? = crossData.getCellValue(rowIndex, crossColumns.columns[columnIndex])
+    override fun getValueAt(rowIndex: Int, columnIndex: Int): Any = crossData.getCellValue(rowIndex, crossColumns.columns[columnIndex])
 
     override fun isCellEditable(rowIndex: Int, columnIndex: Int): Boolean {
         if(crossColumns.isReadOnly) return false
@@ -122,7 +123,7 @@ private class CrossTableRenderer<E>(private val crossColumns: CrossColumns<E>, p
     : JLabel(), TableCellRenderer {
 
     override fun getTableCellRendererComponent( table: JTable, value: Any?,
-        isSelected: Boolean, hasFocus: Boolean, row: Int, column: Int): Component? {
+        isSelected: Boolean, hasFocus: Boolean, row: Int, column: Int): Component {
 
         isOpaque = true
 
