@@ -7,6 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.slf4j.LoggerFactory
 import ru.barabo.db.Query
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.util.*
 import kotlin.collections.ArrayList
@@ -100,6 +101,26 @@ class PoiXlsx(private val template: File, query: Query, private val generateNewF
                 paramContainer.afterReportCreated(newFile!!)
                 newFile = null
             }
+        }
+    }
+
+    fun requestParamAutoTest(paramContainer: ParamContainer) {
+        checkErrorByRow(0, paramContainer) {
+            if(rowData.isEmpty() || rowData[0].tag !is ParamTagXlsx) throw Exception("не найдены параметры")
+
+            buildRow(rowData[0], 0)
+
+            val params = rowData[0].tag as ParamTagXlsx
+
+            buildParams(paramContainer, params.params, vars) {}
+
+            if(newFile == null) {
+                resetAllBuild(params.params)
+            }
+            processData(1)
+
+            paramContainer.afterReportCreated(newFile!!)
+            newFile = null
         }
     }
 
@@ -326,7 +347,10 @@ class PoiXlsx(private val template: File, query: Query, private val generateNewF
     }
 
     private fun saveBook() {
-        FileOutputStream(newFile!!).use { fileOut -> newBook.write(fileOut) }
+        FileOutputStream(newFile!!).use {
+            newBook.write(it)
+        }
+        newBook.close()
     }
 
     private fun getColumns(row: Row): List<ColXlsx> {
@@ -522,9 +546,11 @@ private fun Cell.isBlankOrEmpty(): Boolean = when(cellType) {
 
 private fun createNewBook(templateFile: File): Workbook {
 
-    try {
-        return XSSFWorkbook(templateFile)
+    return try {
 
+        FileInputStream(templateFile).use {
+            XSSFWorkbook(it)
+        }
     } catch (e: Exception) {
 
         logger.error("createNewBook", e)
@@ -627,9 +653,9 @@ private fun Sheet.newRowFromSource(srcRowIndex: Int) {
 
         if(srcRowIndex < this.lastRowNum) {
             this.shiftRows(srcRowIndex+1, this.lastRowNum, 1)
-        } else {
-            logger.error("FAIL shiftRows srcRowIndex=$srcRowIndex lastRowNum= $last")
-        }
+        }/* else {
+             logger.error("FAIL shiftRows srcRowIndex=$srcRowIndex lastRowNum= $last")
+        }*/
 
         this.createRow(srcRowIndex+1)
 

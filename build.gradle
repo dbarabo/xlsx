@@ -23,6 +23,7 @@ dependencies {
     implementation group: "org.jetbrains.kotlin", name: "kotlin-reflect", version: "$kotlinVersion"
 
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.+'
 
     implementation group: 'org.swinglabs.swingx', name: 'swingx-all', version: '1.6.5-1'
 
@@ -31,4 +32,6 @@ dependencies {
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
 
     implementation group: 'com.github.dbarabo', name: 'dbjdb', version: '+'
+
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 }
