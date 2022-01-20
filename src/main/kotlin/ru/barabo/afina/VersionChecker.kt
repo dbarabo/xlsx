@@ -9,8 +9,10 @@ import kotlin.system.exitProcess
 
 object VersionChecker {
 
+    @Volatile
     private var programName = ""
 
+    @Volatile
     private var versionJar = 0
 
     private const val STATE_RUN = 0
@@ -54,7 +56,7 @@ object VersionChecker {
 
     private fun checkVersionRun() {
 
-        val minVersion = AfinaQuery.selectValueType<Number>(SELECT_VERSION) ?: return
+        val minVersion = AfinaQuery.selectValueType<Number>(selectVersion(programName) ) ?: return
 
         if(minVersion.toInt() <= versionJar) return
 
@@ -82,7 +84,8 @@ object VersionChecker {
     private const val NEED_TO_UPDATE =
         "Ваша версия программы безнадежно устарела\n Пожалуйста, закройте ее и в течении 3-х минут она автоматически обновится"
 
-    private val SELECT_VERSION = """
+    private fun selectVersion(programName: String) =
+"""
 select coalesce(min(j.VERSION_MIN), 0)
     from od.PTKB_VERSION_JAR j
    where j.PROGRAM = '$programName'
