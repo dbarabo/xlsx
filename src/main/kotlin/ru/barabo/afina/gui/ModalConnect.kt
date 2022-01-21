@@ -153,6 +153,7 @@ class ModalConnect private constructor(mainWin: JFrame) : JDialog(mainWin, CONNE
 
         @Volatile private var isConnected = false
 
+        @JvmStatic
         fun initConnect(mainWin: JFrame): Boolean {
             modalConnect = ModalConnect(mainWin)
             return isConnected
