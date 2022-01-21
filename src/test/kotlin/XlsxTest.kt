@@ -60,8 +60,8 @@ private fun templateOutFile(idTemplate: Long): Pair<File, File> {
 
     val templateFile = File("${defaultDirectory("temp")}/$templateFileName")
 
-    AfinaConnect.init(NoCommitSecretTest.value[Tag.AFINA_URL]!!,
-        NoCommitSecretTest.value[Tag.AFINA_USER]!!, NoCommitSecretTest.value[Tag.AFINA_PSWD]!!)
+    AfinaConnect.init(secret[Tag.AFINA_URL]!!,
+        secret[Tag.AFINA_USER]!!, secret[Tag.AFINA_PSWD]!!)
 
     val templateDataFile = AfinaQuery.selectBlobToFile(SELECT_BLOB_TEMPLATE_REPORT, arrayOf(idTemplate), templateFile)
 

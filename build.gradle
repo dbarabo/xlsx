@@ -1,15 +1,14 @@
 buildscript {
     ext {
-        kotlinVersion = '1.6.10'
+        kotlinVer = '1.6.10'
     }
 }
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "$kotlinVersion"
-}
+    id "org.jetbrains.kotlin.jvm" version "$kotlinVer"
 
-group 'ru.barabo'
-version '0.9.7'
+    id 'maven-publish'
+}
 
 repositories {
     mavenCentral()
@@ -18,9 +17,9 @@ repositories {
 }
 
 dependencies {
-    implementation group: "org.jetbrains.kotlin", name: "kotlin-stdlib", version: "$kotlinVersion"
+    implementation group: "org.jetbrains.kotlin", name: "kotlin-stdlib", version: "$kotlinVer"
 
-    implementation group: "org.jetbrains.kotlin", name: "kotlin-reflect", version: "$kotlinVersion"
+    implementation group: "org.jetbrains.kotlin", name: "kotlin-reflect", version: "$kotlinVer"
 
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
     testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.+'
@@ -34,4 +33,19 @@ dependencies {
     implementation group: 'com.github.dbarabo', name: 'dbjdb', version: '+'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+}
+
+group 'ru.barabo'
+version '0.9.10'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'ru.barabo'
+            artifactId = 'xlsx'
+            version = '0.9.10'
+
+            from components.java
+        }
+    }
 }

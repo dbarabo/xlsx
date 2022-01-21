@@ -15,7 +15,8 @@ object ResourcesManager {
 
     private fun loadIcon(icoName :String): ImageIcon? = pathResource("$icoPath$icoName.png")?.let { ImageIcon(it) }
 
-    private fun pathResource(fullPath: String): URL? {
+    @JvmStatic
+    fun pathResource(fullPath: String): URL? {
 
         val path = ResourcesManager::class.java.getResource(fullPath)?.toExternalForm()
 
