@@ -5,10 +5,10 @@ import javax.swing.*
 
 open class ButtonKarkas(val ico: String? = null,
                         val name: String? = null,
-                        private val groupIndex: Int? = null,
+                        val groupIndex: Int? = null,
                         var listener: ActionListener? = null) {
 
-    private var button: AbstractButton? = null
+    var button: AbstractButton? = null
 
     val imageIcon: ImageIcon?
     get() = ico?.let { ResourcesManager.getIcon(it) }
