@@ -583,7 +583,9 @@ data class Col(val index: Int,
             VarType.INT,
             VarType.NUMBER -> Number(index, rowIndex, (varResult.getVar().value as kotlin.Number).toDouble() , format)
             VarType.VARCHAR -> Label(index, rowIndex, (varResult.getVar().value).toString(), format)
-            VarType.DATE -> Label(index, rowIndex, byFormatDate(varResult.getVar().value as Date), format)
+
+            VarType.DATE -> DateTime(index, rowIndex, varResult.getVar().value as? Date, format) // Label(index, rowIndex, byFormatDate(varResult.getVar().value as Date), format)
+
             else -> Blank(index, rowIndex, format)
         }
     }

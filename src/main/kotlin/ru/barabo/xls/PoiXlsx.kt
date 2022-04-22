@@ -14,7 +14,7 @@ import kotlin.collections.ArrayList
 
 private val logger = LoggerFactory.getLogger(PoiXlsx::class.java)
 
-class PoiXlsx(private val template: File, query: Query, private val generateNewFile: (File) -> File) : ExcelSql {
+class PoiXlsx(private val template: File, query: Query, private val generateNewFile: (File) -> File): ExcelSql {
 
     private lateinit var newBook: Workbook
 

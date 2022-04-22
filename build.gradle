@@ -22,7 +22,7 @@ dependencies {
     implementation group: "org.jetbrains.kotlin", name: "kotlin-reflect", version: "$kotlinVer"
 
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
-    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.+'
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.11'
 
     implementation group: 'org.swinglabs.swingx', name: 'swingx-all', version: '1.6.5-1'
 
@@ -36,7 +36,7 @@ dependencies {
 }
 
 group 'ru.barabo'
-version '0.9.12'
+version '0.9.13'
 
 publishing {
     publications {

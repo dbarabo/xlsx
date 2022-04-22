@@ -15,7 +15,7 @@ class XlsxTest {
 
     private val logger = LoggerFactory.getLogger(XlsxTest::class.java)
 
-    @Test
+    //@Test
     fun testBuildWithOutParam() {
         val poi = generatePoi(1210205169L)
         poi.buildWithOutParam(ArrayList())
@@ -27,7 +27,7 @@ class XlsxTest {
         poi2.buildWithOutParam(ArrayList())
     }
 
-    @Test
+    //@Test
     fun testSimpleBuildWithrequestParam() {
 
         val poi = generatePoi(1210205169L)
@@ -36,7 +36,7 @@ class XlsxTest {
         poi.requestParamAutoTest(ParamContainerTest() )
     }
 
-    @Test
+   // @Test
     fun testTwoClickOkBuildWithrequestParam() {
 
         val poi = generatePoi(1210205169L)
