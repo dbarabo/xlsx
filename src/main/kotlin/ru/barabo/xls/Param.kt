@@ -112,7 +112,7 @@ private fun Param.getRefCursorParam(params: List<Param>, vars: List<Var>): List<
     return cursorList
 }
 
-private fun Container.datePicker(varParam: Var, gridY: Int): JXDatePicker {
+fun Container.datePicker(varParam: Var, gridY: Int): JXDatePicker {
 
     val label = varParam.name.replace('_', ' ').lowercase(Locale.getDefault())
 
@@ -135,7 +135,7 @@ private fun Container.datePicker(varParam: Var, gridY: Int): JXDatePicker {
     return datePicker
 }
 
-private fun Container.dateTimePicker(varParam: Var, gridY: Int): JXDatePicker {
+fun Container.dateTimePicker(varParam: Var, gridY: Int): JXDatePicker {
 
     val label = varParam.name.replace('_', ' ').lowercase(Locale.getDefault())
 
@@ -160,7 +160,7 @@ private fun Container.dateTimePicker(varParam: Var, gridY: Int): JXDatePicker {
     return dateTimePicker
 }
 
-private fun Container.comboBox(varParam: Var, cursor: CursorData, gridY: Int): JComboBox<ComboArray> {
+fun Container.comboBox(varParam: Var, cursor: CursorData, gridY: Int): JComboBox<ComboArray> {
 
     val comboData = Vector(cursor.data.map { ComboArray(it) }.toMutableList())
 
@@ -189,7 +189,7 @@ private fun Container.comboBox(varParam: Var, cursor: CursorData, gridY: Int): J
     return combo
 }
 
-private fun Container.comboSearch(varParam: Var, cursor: CursorData, gridY: Int, cursorRefs: List<CursorData>): JComboBox<ComboArray> {
+fun Container.comboSearch(varParam: Var, cursor: CursorData, gridY: Int, cursorRefs: List<CursorData>): JComboBox<ComboArray> {
 
     val comboData = Vector(cursor.data.map { ComboArray(it) }.toMutableList())
 
@@ -230,7 +230,7 @@ class ComboArray(private val item: Array<Any?>) {
     override fun toString(): String = if(item.isEmpty() || item[0] == null)"" else item[0].toString()
 }
 
-private fun Container.checkBox(varParam: Var, gridY: Int): JCheckBox {
+fun Container.checkBox(varParam: Var, gridY: Int): JCheckBox {
     val label = varParam.name.replace('_', ' ').lowercase(Locale.getDefault())
 
     add( JLabel(label), labelConstraint(gridY) )
@@ -244,7 +244,7 @@ private fun Container.checkBox(varParam: Var, gridY: Int): JCheckBox {
     return checkBox
 }
 
-private fun Container.textFieldAmount(varParam: Var, gridY: Int): JTextField {
+fun Container.textFieldAmount(varParam: Var, gridY: Int): JTextField {
     val label = varParam.name.replace('_', ' ').lowercase(Locale.getDefault())
 
     add( JLabel(label), labelConstraint(gridY) )
@@ -277,7 +277,7 @@ private fun Container.textFieldAmount(varParam: Var, gridY: Int): JTextField {
     return textField
 }
 
-private fun Container.textFieldInt(varParam: Var, gridY: Int): JTextField {
+fun Container.textFieldInt(varParam: Var, gridY: Int): JTextField {
     val label = varParam.name.replace('_', ' ').lowercase(Locale.getDefault())
 
     add( JLabel(label), labelConstraint(gridY) )

@@ -1,10 +1,11 @@
-import org.junit.Test
 import org.slf4j.LoggerFactory
 import ru.barabo.afina.AfinaConnect
 import ru.barabo.afina.AfinaQuery
 import ru.barabo.gui.swing.getDefaultToDirectory
 import ru.barabo.xls.ParamContainer
+import ru.barabo.xls.Parser
 import ru.barabo.xls.PoiXlsx
+import ru.barabo.xls.Var
 import java.awt.Container
 import java.io.File
 import java.util.*
@@ -14,6 +15,17 @@ import javax.swing.JTabbedPane
 class XlsxTest {
 
     private val logger = LoggerFactory.getLogger(XlsxTest::class.java)
+
+    //@Test
+    fun testSimpleParserNumber() {
+
+        val parser: Parser = Parser(AfinaQuery)
+
+        val expr = parser.parseExpression("1", ArrayList<Var>())
+
+        logger.error("expr.size=${expr.size}")
+        logger.error("expr=$expr")
+    }
 
     //@Test
     fun testBuildWithOutParam() {

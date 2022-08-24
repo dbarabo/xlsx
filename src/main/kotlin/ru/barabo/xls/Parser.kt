@@ -286,6 +286,7 @@ class Parser(private val query: Query) {
     private fun parseNumber(index: Int): Int =  parseAny(index, ::isNumber, ::numberFillerConverter)
 
     private fun numberFillerConverter(index: Int): Int {
+
         val value: Number =
             (if (filling.indexOf(DOUBLE_SEPARATOR) > 0) filling.toDoubleOrNull() else filling.toLongOrNull())
                 ?: throw Exception("expression is not number:$filling")
@@ -298,6 +299,7 @@ class Parser(private val query: Query) {
     }
 
     private fun isNumber(item: Char): Boolean {
+
         return when(item) {
             in '0'..'9', '-', DOUBLE_SEPARATOR -> {
                 filling += item
@@ -507,6 +509,7 @@ class Parser(private val query: Query) {
 
     private fun parseAny(index: Int, isCondition: (Char)-> Boolean, fillerConverter: (index: Int) -> Int): Int {
         var newIndex = index
+
         while(newIndex < expression.length && isCondition(expression[newIndex])) newIndex++
 
         return fillerConverter(newIndex)
