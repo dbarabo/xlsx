@@ -70,6 +70,11 @@ class PoiXlsx(private val template: File, query: Query, private val generateNewF
                         rowData += row
                     }
                     is SubLoopIfTagXlsx -> {
+
+                        if(rowXls.isCellsMerged() ) {
+                            row.height = rowXls.height
+                        }
+
                         tagLoop!!.addSubIf(row)
                     }
                     is SubLoopLoopTagXlsx -> {
@@ -529,9 +534,16 @@ class PoiXlsx(private val template: File, query: Query, private val generateNewF
     }
 
     private fun buildDefaultRow(row: RowXlsx, rowIndex: Int) {
+
+        var isFirst = true
+
         for (column in row.columns) {
 
             val rowCells = sheet.getRow(rowIndex) ?: sheet.createRow(rowIndex)
+            if(isFirst && row.height != null) {
+                isFirst = false
+                rowCells.height = row.height!!
+            }
 
             column.setContentByRow(rowCells)
         }
@@ -563,7 +575,8 @@ data class RowXlsx(
     val tag: TagXlsx,
     val index: Int,
     val expr: Expression,
-    val columns: List<ColXlsx> = emptyList()
+    val columns: List<ColXlsx> = emptyList(),
+    var height: Short? = null
 )
 
 data class ColXlsx(
@@ -689,3 +702,8 @@ private fun Sheet.newRowFromSource(srcRowIndex: Int) {
 
 private fun Sheet.mergedRegionsByRow(rowIndex: Int): List<CellRangeAddress> =
     mergedRegions.filter { it.firstRow == rowIndex && rowIndex == it.lastRow }
+
+private fun Row.isCellsMerged(): Boolean {
+
+    return sheet.mergedRegions.firstOrNull { it.firstRow == this.rowNum || it.lastRow == this.rowNum } != null
+}

@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVer = '1.7.10'
+        kotlinVer = '1.7.20'
     }
 }
 
@@ -36,14 +36,14 @@ dependencies {
 }
 
 group 'ru.barabo'
-version '0.9.15'
+version '0.9.16'
 
 publishing {
     publications {
         maven(MavenPublication) {
             groupId = 'ru.barabo'
             artifactId = 'xlsx'
-            version = '0.9.15'
+            version = '0.9.16'
 
             from components.java
         }
