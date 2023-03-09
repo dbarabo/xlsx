@@ -646,7 +646,7 @@ private fun Cell.setVarByType(varResult: ReturnResult) {
         VarType.INT,
         VarType.NUMBER -> this.setCellValue((varResult.getVar().value as Number).toDouble())
         VarType.VARCHAR -> this.setCellValue((varResult.getVar().value).toString())
-        VarType.DATE -> this.setCellValue(byFormatDate(varResult.getVar().value as Date))
+        VarType.DATE -> this.setCellValue(/*byFormatDate(*/varResult.getVar().value as Date/*)*/)
         else -> this.setBlank()
     }
 }

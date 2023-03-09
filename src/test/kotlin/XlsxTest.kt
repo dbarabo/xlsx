@@ -1,11 +1,9 @@
+import org.junit.Test
 import org.slf4j.LoggerFactory
 import ru.barabo.afina.AfinaConnect
 import ru.barabo.afina.AfinaQuery
 import ru.barabo.gui.swing.getDefaultToDirectory
-import ru.barabo.xls.ParamContainer
-import ru.barabo.xls.Parser
-import ru.barabo.xls.PoiXlsx
-import ru.barabo.xls.Var
+import ru.barabo.xls.*
 import java.awt.Container
 import java.io.File
 import java.util.*
@@ -58,6 +56,29 @@ class XlsxTest {
 
         poi.requestParamAutoTest(ParamContainerTest() )
     }
+
+    //@Test
+    fun testReportm() {
+        val poi = generatePoi(1276713842L)
+
+        val vr: MutableList<Var> = ArrayList()
+
+        vr += Var("Период_с", VarResult(VarType.DATE, java.sql.Date(2023, 3, 1)))
+        vr += Var("Период_по", VarResult(VarType.DATE, java.sql.Date(2023, 3, 9)))
+
+        val cols: MutableList<Var> = ArrayList()
+        cols += Var("Classified", VarResult(VarType.INT, null) )
+        vr += Var("Отделение", VarResult(VarType.RECORD, Record(cols) ))
+
+        val cols2: MutableList<Var> = ArrayList()
+        cols2 += Var("ID", VarResult(VarType.INT, 1) )
+        vr += Var("Отношения_с_клиентом", VarResult(VarType.RECORD, Record(cols2) ))
+
+        poi.initRowData(vr)
+        poi.requestParamAutoTest(ParamContainerTest() )
+    }
+
+
 }
 
 private fun generatePoi(idTemplate: Long): PoiXlsx {
