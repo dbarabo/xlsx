@@ -66,14 +66,14 @@ fun Container.textFieldVertical(label: String, gridY: Int): JTextField {
     }
 }
 
-fun Container.textFieldHorizontal(label: String, gridY: Int): JTextField {
+fun Container.textFieldHorizontal(label: String, gridY: Int, gridX: Int = 0, width: Int = 1): JTextField {
 
-    add( JLabel(label), labelConstraint(gridY) )
+    add( JLabel(label), labelConstraint(gridY, gridX) )
 
     return JTextField().apply {
 
 
-        this@textFieldHorizontal.add(this, textConstraint(gridY = gridY, gridX = 1) )
+        this@textFieldHorizontal.add(this, textConstraint(gridY = gridY, gridX = gridX + 1, width = width) )
     }
 }
 
