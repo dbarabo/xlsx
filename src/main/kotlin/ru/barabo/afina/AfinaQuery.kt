@@ -4,16 +4,23 @@ import org.slf4j.LoggerFactory
 import ru.barabo.db.Query
 import java.sql.Clob
 
-data class UserDepartment(val userName: String?, val departmentName: String?,
-                          val workPlace: String?, val accessMode: AccessMode,
-                          val userId: String, val workPlaceId: Long)
+data class UserDepartment(val userName: String?,
+                          val departmentName: String?,
+                          val workPlace: String?,
+                          val accessMode: AccessMode,
+                          val userId: String,
+                          val workPlaceId: Long,
+                          val departmentId: Long? = null,
+                          val accountCode: String = "",
+                          val accountId: Long? = null)
 
 enum class AccessMode {
     None,
     FullAccess,
     DelbAccess,
     CreditAccess,
-    CardMoveOutOnly;
+    CardMoveOutOnly,
+    CashBox;
 
     companion object {
         private const val SUPERVISOR = "СУПЕРВИЗОР"
@@ -22,17 +29,20 @@ enum class AccessMode {
 
         private const val CREDIT = "КРЕДИТ"
 
+        private const val CASH_BOX = "КАСС"
+
         fun byWorkPlace(workPlace: String): AccessMode {
             return when {
                 workPlace.uppercase().indexOf(SUPERVISOR) >= 0 -> FullAccess
                 workPlace.uppercase().indexOf(DELB) >= 0 ->  DelbAccess
                 workPlace.uppercase().indexOf(CREDIT) >= 0 ->  CreditAccess
+                workPlace.uppercase().indexOf(CASH_BOX) >= 0 ->  CashBox
+
                 else -> CardMoveOutOnly
             }
         }
     }
 }
-
 
 object AfinaQuery : Query(AfinaConnect) {
 
@@ -41,10 +51,6 @@ object AfinaQuery : Query(AfinaConnect) {
     @JvmStatic
     @Synchronized
     fun nextSequence(): Number = selectValue(query = SEQ_CLASSIFIED) as Number
-
-    private const val SEL_USER = "select user from dual"
-
-    private const val SEL_CURSOR_USER_DEPARTMENT = "{ ? = call od.ptkb_plastic_auto.getUserAndDepartment }"
 
     private lateinit var userDepartment: UserDepartment
 
@@ -55,6 +61,10 @@ object AfinaQuery : Query(AfinaConnect) {
         }
 
         return userDepartment
+    }
+
+    fun setUserDepartmentData(userDepartmentData: UserDepartment) {
+        userDepartment = userDepartmentData
     }
 
     private fun initUserDepartment(): UserDepartment {
@@ -85,3 +95,7 @@ object AfinaQuery : Query(AfinaConnect) {
 fun Clob.clobToString() = this.getSubString(1, this.length().toInt())
 
 const val SEQ_CLASSIFIED = "select classified.nextval from dual"
+
+private const val SEL_USER = "select user from dual"
+
+private const val SEL_CURSOR_USER_DEPARTMENT = "{ ? = call od.ptkb_plastic_auto.getUserAndDepartment }"
