@@ -36,14 +36,14 @@ dependencies {
 }
 
 group 'ru.barabo'
-version '0.9.20'
+version '0.9.21'
 
 publishing {
     publications {
         maven(MavenPublication) {
             groupId = 'ru.barabo'
             artifactId = 'xlsx'
-            version = '0.9.20'
+            version = '0.9.21'
 
             from components.java
         }
