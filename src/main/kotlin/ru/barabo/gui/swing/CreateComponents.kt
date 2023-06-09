@@ -1,5 +1,6 @@
 package ru.barabo.gui.swing
 
+import org.jdesktop.swingx.JXDatePicker
 import org.slf4j.LoggerFactory
 import java.awt.*
 import java.io.File
@@ -66,17 +67,6 @@ fun Container.textFieldVertical(label: String, gridY: Int): JTextField {
     }
 }
 
-fun Container.textFieldHorizontal(label: String, gridY: Int, gridX: Int = 0, width: Int = 1): JTextField {
-
-    add( JLabel(label), labelConstraint(gridY, gridX) )
-
-    return JTextField().apply {
-
-
-        this@textFieldHorizontal.add(this, textConstraint(gridY = gridY, gridX = gridX + 1, width = width) )
-    }
-}
-
 fun Container.textArea(label: String, gridY: Int, height: Int = 2): JTextArea {
 
     add( JLabel(label), labelConstraint(gridY) )
@@ -91,7 +81,7 @@ fun Container.textArea(label: String, gridY: Int, height: Int = 2): JTextArea {
     }
 }
 
-fun Container.textAreaHorizontal(label: String, gridY: Int, height: Int = 2): JTextArea {
+fun Container.textAreaHorizontal(label: String, gridY: Int, height: Int = 2,  width: Int = 1): JTextArea {
 
     add( JLabel(label), labelConstraint(gridY) )
 
@@ -101,7 +91,17 @@ fun Container.textAreaHorizontal(label: String, gridY: Int, height: Int = 2): JT
 
         this.isEditable = false
 
-        this@textAreaHorizontal.add(this, textConstraint(gridY, height, 1) )
+        this@textAreaHorizontal.add(this, textConstraint(gridY, height, 1, width) )
+    }
+}
+fun Container.textFieldHorizontal(label: String, gridY: Int, gridX: Int = 0, width: Int = 1): JTextField {
+
+    add( JLabel(label), labelConstraint(gridY, gridX) )
+
+    return JTextField().apply {
+
+
+        this@textFieldHorizontal.add(this, textConstraint(gridY = gridY, gridX = gridX + 1, width = width) )
     }
 }
 
@@ -210,6 +210,17 @@ fun Container.toolButton(icon: String, name: String?, groupIndex: Int? = null,
     button.horizontalAlignment = SwingConstants.LEFT
 
     return button.apply { this@toolButton.add(this) }
+}
+
+fun Container.datePicker(label: String, gridY: Int, gridX: Int = 0, width: Int = 1): JXDatePicker {
+
+    add( JLabel(label), labelConstraint(gridY, gridX) )
+
+    val datePicker = JXDatePicker()
+
+    this.add(datePicker, textConstraint(gridY = gridY, gridX = gridX + 1, width = width) )
+
+    return datePicker
 }
 
 private fun MutableList<ButtonGroup>.addGroup(button: AbstractButton?, index: Int) {
