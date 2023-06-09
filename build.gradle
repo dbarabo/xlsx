@@ -29,20 +29,20 @@ dependencies {
     implementation group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6.12'
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
 
-    implementation group: 'com.github.dbarabo', name: 'dbjdb', version: '0.9.7'
+    implementation group: 'com.github.dbarabo', name: 'dbjdb', version: '0.9.8'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 }
 
 group 'ru.barabo'
-version '0.9.24'
+version '0.9.25'
 
 publishing {
     publications {
         maven(MavenPublication) {
             groupId = 'ru.barabo'
             artifactId = 'xlsx'
-            version = '0.9.24'
+            version = '0.9.25'
 
             from components.java
         }
