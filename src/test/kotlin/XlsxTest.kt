@@ -2,6 +2,7 @@ import org.junit.Test
 import org.slf4j.LoggerFactory
 import ru.barabo.afina.AfinaConnect
 import ru.barabo.afina.AfinaQuery
+import ru.barabo.gui.swing.comboBoxWithItems
 import ru.barabo.gui.swing.getDefaultToDirectory
 import ru.barabo.xls.*
 import java.awt.Container
@@ -9,12 +10,24 @@ import java.io.File
 import java.util.*
 import javax.swing.JPanel
 import javax.swing.JTabbedPane
+import kotlin.collections.ArrayList
 
 class XlsxTest {
 
     private val logger = LoggerFactory.getLogger(XlsxTest::class.java)
 
-    //@Test
+    @Test
+    fun testComboBoxWithItems() {
+
+        val list = ArrayList<String>()
+
+        JPanel().apply {
+            comboBoxWithItems("Плательщик", 0, list, 0)
+        }
+    }
+
+
+        //@Test
     fun testSimpleParserNumber() {
 
         val parser: Parser = Parser(AfinaQuery)
