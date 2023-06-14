@@ -58,7 +58,7 @@ class ModalConnect private constructor(mainWin: JFrame) : JDialog(mainWin, CONNE
         label.horizontalAlignment = SwingConstants.RIGHT
         contentPane.add(label)
         contentPane.add(tf)
-        servers = JComboBox(arrayOf("AFINA", "ORATEST", "TEST_DEMO", "NEW_ORA180"))
+        servers = JComboBox(arrayOf("AFINA", "ORATEST", "TEST_BU", "NEW_ORA180"))
         servers.selectedIndex = userPrefs.getInt("server", 0)
         label = JLabel("Вход в:")
         label.horizontalAlignment = SwingConstants.RIGHT
@@ -145,8 +145,8 @@ class ModalConnect private constructor(mainWin: JFrame) : JDialog(mainWin, CONNE
         private val items = arrayOf("BARDV", "NEGMA", "SHERBO")
         private val SERVER_NAME = arrayOf(
             "jdbc:oracle:thin:@192.168.0.43:1521:AFINA",
-            "jdbc:oracle:thin:@192.168.0.42:1521:AFINA",
-            "jdbc:oracle:thin:@192.168.0.47:1521:AFINA",
+            "jdbc:oracle:thin:@192.168.0.181:1521:AFINA",
+            "jdbc:oracle:thin:@192.168.0.181:1521:AFINABU",
             "jdbc:oracle:thin:@192.168.0.180:1521:AFINA"
         )
 
