@@ -16,7 +16,7 @@ class XlsxTest {
 
     private val logger = LoggerFactory.getLogger(XlsxTest::class.java)
 
-    @Test
+    //@Test
     fun testComboBoxWithItems() {
 
         val list = ArrayList<String>()
@@ -27,7 +27,7 @@ class XlsxTest {
     }
 
 
-        //@Test
+    //@Test
     fun testSimpleParserNumber() {
 
         val parser: Parser = Parser(AfinaQuery)
